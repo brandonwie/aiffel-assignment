@@ -1,0 +1,23 @@
+* {
+  font-family: $NotoSans;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin: 0;
+}
+
+.primary {
+  background-color: $primary;
+}
+
+.secondary {
+  background-color: $secondary;
+}
+
+.success {
+  background-color: $success;
+}
+
+.main {
+  background-color: $main;
+}

@@ -1,0 +1,14 @@
+// ul
+.forum-list-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  list-style: none;
+  padding-left: 0;
+}
+
+@media (max-width: 768px) {
+  .forum-list-container {
+    width: 100%;
+  }
+}

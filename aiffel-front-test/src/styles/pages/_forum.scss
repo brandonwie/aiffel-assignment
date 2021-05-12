@@ -1,0 +1,19 @@
+.forum-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 150px auto;
+  width: 50%;
+}
+
+@media (max-width: 1200px) {
+  .forum-container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 800px) {
+  .forum-container {
+    width: 95%;
+  }
+}

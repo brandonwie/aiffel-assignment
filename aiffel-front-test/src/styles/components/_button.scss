@@ -1,0 +1,25 @@
+button {
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+  color: $white;
+  background-color: $discordLogoBlue;
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+  &.sm {
+    width: 70px;
+    height: 30px;
+  }
+
+  &.md {
+    width: 100px;
+    height: 40px;
+  }
+
+  &.lg {
+    font-size: 18;
+    width: 130px;
+    height: 50px;
+  }
+}

@@ -1,0 +1,32 @@
+.forum-post-container {
+  display: inline-block;
+  border: 1px solid $discordWebGrey;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 30px;
+  .forum-post-link {
+    text-decoration: none;
+    color: $darkLv1;
+  }
+  .forum-post-title {
+    font-size: 25px;
+    margin-bottom: 25px;
+  }
+
+  .forum-post-content {
+    font-family: $NotoSans;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $greyLv3;
+  }
+
+  .forum-post-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    .forum-post-tag {
+      color: $discordLogoBlue;
+    }
+  }
+}

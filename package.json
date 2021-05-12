@@ -1,0 +1,24 @@
+{
+  "name": "aiffel",
+  "version": "1.0.0",
+  "description": "An assignment Project of AIFFEL",
+  "scripts": {
+    "client": "npm run start --prefix aiffel-front-test",
+    "server": "npm run start --prefix json-server-test",
+    "start": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "Seokhyun Wie",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^6.1.0",
+    "redux-devtools-extension": "^2.13.9"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.5.1",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
+    "sass": "^1.32.12"
+  }
+}
