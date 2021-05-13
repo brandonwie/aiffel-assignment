@@ -9,10 +9,12 @@ export interface UserProps {
   email: string;
   password: string;
   username: string;
-  isLoggedIn: boolean;
-  loading: false;
 }
 
+interface UserLoadedAction {
+  type: UserActionType.USER_LOADED;
+  payload: UserProps;
+}
 interface LoginAction {
   type: UserActionType.LOG_IN;
 }
@@ -32,6 +34,7 @@ interface LogoutAction {
 }
 
 export type UserAction =
+  | UserLoadedAction
   | LoginAction
   | LoginSuccessAction
   | LoginErrorAction

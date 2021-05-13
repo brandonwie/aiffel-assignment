@@ -1,40 +1,23 @@
-import {
-  ChangeEvent,
-  FC,
-  FormEvent,
-  MouseEvent,
-  useEffect,
-  useState,
-} from 'react';
-import { useHistory } from 'react-router-dom';
+import { ChangeEvent, FC, FormEvent, MouseEvent, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useActions } from '../hooks/useActions';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import { useSelector } from 'react-redux';
 import { checkEmail, checkPassword } from './LoginForm-helper';
+import { useSelector } from 'react-redux';
 import { RootState } from '../state';
 
 const LoginForm: FC = (): JSX.Element => {
+  const { isAuthenticated } = useSelector((state: RootState) => state.user);
   // Hooks
   const { login } = useActions();
-  const { isLoggedIn } = useSelector((state: RootState) => state.user);
-
-  const history = useHistory();
-  useEffect(() => {
-    if (isLoggedIn === true) {
-      history.push('/forum');
-    }
-  }, [isLoggedIn, history]);
-
   const [formState, setFormState] = useState({
     email: '',
     password: '',
   });
-
   const [showPassword, setShowPassword] = useState(false);
   const [isEmail, setIsEmail] = useState(true);
   const [isPassword, setIsPassword] = useState(true);
-
   const { email, password } = formState;
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +49,11 @@ const LoginForm: FC = (): JSX.Element => {
     event.preventDefault();
     login(email, password);
   };
+
+  //! Later need to implement PrivateRoute
+  if (isAuthenticated) {
+    return <Redirect to='/forum' />;
+  }
 
   return (
     <div className='login-outer-container'>

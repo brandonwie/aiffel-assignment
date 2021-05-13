@@ -5,16 +5,16 @@ import { Reducer } from 'redux';
 interface UserState {
   user: UserProps | null;
   token: string | null;
-  isLoggedIn: boolean;
-  isLoading: boolean;
+  isAuthenticated: boolean;
+  loading: boolean;
   error: string | null;
 }
 
 const initialState = {
   user: null,
-  token: null,
-  isLoggedIn: false,
-  isLoading: false,
+  token: localStorage.getItem('token'),
+  isAuthenticated: false,
+  loading: true,
   error: null,
 };
 
@@ -23,28 +23,41 @@ const userReducer: Reducer<UserState> = (
   action: UserAction
 ): UserState => {
   switch (action.type) {
+    case UserActionType.USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: action.payload,
+      };
     case UserActionType.LOG_IN:
       return {
         ...state,
-        isLoading: true,
+        loading: true,
       };
     case UserActionType.LOG_IN_SUCCESS:
       return {
         ...state,
         user: action.payload,
-        isLoggedIn: true,
-        isLoading: false,
-        token: action.payload.username,
+        isAuthenticated: true,
+        token: action.payload.password,
+        loading: false,
         error: null,
       };
     case UserActionType.LOG_IN_ERROR:
       return {
         ...state,
-        isLoading: false,
+
         error: action.payload,
       };
     case UserActionType.LOG_OUT:
-      return initialState;
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        loading: false,
+        user: null,
+      };
     default:
       return state;
   }

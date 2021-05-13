@@ -14,43 +14,62 @@ header {
   justify-content: space-between;
   width: calc(100% - 10vw);
   height: 80px;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  img {
-    height: 35px;
-  }
-}
-
-.user-info-container {
-  display: flex;
-  align-items: center;
-
-  .welcome-msg-container {
-    font-size: 14px;
-    margin-right: 10px;
-  }
-
-  .user-img-container {
-    margin-right: 10px;
+  // 로고
+  .logo-container {
+    display: flex;
+    align-items: center;
     img {
-      height: 40px;
+      height: 35px;
     }
   }
 
-  .user-name-container {
-    font-size: 18px;
-    font-weight: bold;
-
-    span {
-      padding-left: 5px;
+  .user-info-container {
+    display: flex;
+    align-items: center;
+    // 환영 메시지
+    .welcome-msg-container {
       font-size: 14px;
+      margin-right: 10px;
+    }
+    .profile-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: $discordLogoBlack;
+      .user-img-container {
+        margin-right: 10px;
+        img {
+          height: 40px;
+        }
+      }
+      // 유저 이름
+      .user-name-container {
+        font-size: 18px;
+        font-weight: bold;
+        // 님
+        span {
+          padding-left: 5px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  // 로그아웃 버튼
+  .button-logout {
+    margin-left: 10px;
+    width: 80px;
+    height: 35px;
+    background-color: transparent;
+    border: 1px solid $discordLogoBlack;
+    color: $discordLogoBlack;
+    font-size: 14px;
+    &:hover {
+      transform: scale(0.95);
     }
   }
 }
-
+// Responsive: 환영메시지와 '님' 사라짐
 @media (max-width: 768px) {
   .welcome-msg-container,
   .user-name-container span {

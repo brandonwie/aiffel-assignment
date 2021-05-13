@@ -1,4 +1,5 @@
 export enum UserActionType {
+  USER_LOADED = 'USER_LOADED',
   LOG_IN = 'LOG_IN',
   LOG_IN_SUCCESS = 'LOG_IN_SUCCESS',
   LOG_IN_ERROR = 'LOG_IN_ERROR',

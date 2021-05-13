@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { ForumPostProps } from '../state/actions';
 
-interface PostDetailPageProps {
+interface PostDetailProps {
   post: ForumPostProps;
 }
 
-const ForumDetailPage: FC<PostDetailPageProps> = ({
+const ForumDetail: FC<PostDetailProps> = ({
   post,
-}: PostDetailPageProps): JSX.Element => {
+}: PostDetailProps): JSX.Element => {
   return <div className='forum-container'>Hi Post!</div>;
 };
 
-export default ForumDetailPage;
+export default ForumDetail;

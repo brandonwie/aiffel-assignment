@@ -6,16 +6,13 @@ import Posts from '../layout/Posts';
 import Pagination from '../layout/Pagination';
 import SearchBar from '../layout/SearchBar';
 import { ForumPostProps } from '../state/actions';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const Forum: FC = (): JSX.Element => {
   const { getForums } = useActions();
   const { posts } = useSelector((state: RootState) => state.forum);
-  const { isLoggedIn } = useSelector((state: RootState) => state.user);
-
-  const history = useHistory();
+  const { isAuthenticated } = useSelector((state: RootState) => state.user);
   const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
@@ -25,23 +22,20 @@ const Forum: FC = (): JSX.Element => {
   const sortedPosts = posts.slice().sort((a, b) => b.id - a.id);
 
   const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFistPost = indexOfLastPost - postsPerPage;
-  const currentPosts = sortedPosts.slice(indexOfFistPost, indexOfLastPost);
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
 
   const searchedCurrentPosts = searchedPosts.slice(
-    indexOfFistPost,
+    indexOfFirstPost,
     indexOfLastPost
   );
 
   useEffect(() => {
-    // State를 토큰
-    if (!isLoggedIn) {
-      history.replace('/');
-    }
-
-    setLoading(true);
-    getForums();
-    setLoading(false);
+    const fetchForums = () => {
+      getForums();
+    };
+    fetchForums();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Change page
@@ -78,6 +72,11 @@ const Forum: FC = (): JSX.Element => {
     setIsSearching(false);
     paginate(1);
   };
+
+  //! Later need to implement PrivateRoute
+  if (!isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <div className='forum-container'>

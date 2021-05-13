@@ -16,7 +16,7 @@ const Post: FC<PostProps> = ({ post }: PostProps): JSX.Element => {
 
   return (
     <li className='forum-post-container'>
-      <Link to={id.toString()} className='forum-post-link'>
+      <Link to={'forum/' + id.toString()} className='forum-post-link'>
         <div className='forum-post-title'>{title}</div>
         <div className='forum-post-content'>{partialContent}...</div>
         <div className='forum-post-info'>
