@@ -1,59 +1,32 @@
+import { ReactElement } from 'react';
 import { ChangeEvent, FC, FormEvent, MouseEvent, useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { useActions } from '../hooks/useActions';
+
 import Button from '../components/Button';
 import Input from '../components/Input';
-import { checkEmail, checkPassword } from './LoginForm-helper';
-import { useSelector } from 'react-redux';
-import { RootState } from '../state';
 
-const LoginForm: FC = (): JSX.Element => {
-  const { isAuthenticated } = useSelector((state: RootState) => state.user);
-  // Hooks
-  const { login } = useActions();
-  const [formState, setFormState] = useState({
-    email: '',
-    password: '',
-  });
+interface LoginFormProps {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  email: string;
+  password: string;
+  isEmail: boolean;
+  isPassword: boolean;
+}
+
+const LoginForm: FC<LoginFormProps> = ({
+  onChange,
+  onSubmit,
+  email,
+  password,
+  isEmail,
+  isPassword,
+}): ReactElement => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isEmail, setIsEmail] = useState(true);
-  const [isPassword, setIsPassword] = useState(true);
-  const { email, password } = formState;
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    //* validations
-    if (event.target.name === 'email') {
-      const validEmail = checkEmail(event.target.value);
-      if (!validEmail) {
-        setIsEmail(false);
-      } else {
-        setIsEmail(true);
-      }
-    } else {
-      const validPassword = checkPassword(event.target.value);
-      if (!validPassword) {
-        setIsPassword(false);
-      } else {
-        setIsPassword(true);
-      }
-    }
-    setFormState({ ...formState, [event.target.name]: event.target.value });
-  };
 
   const handlePasswordType = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setShowPassword(!showPassword);
   };
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    login(email, password);
-  };
-
-  //! Later need to implement PrivateRoute
-  if (isAuthenticated) {
-    return <Redirect to='/forum' />;
-  }
 
   return (
     <div className='login-outer-container'>

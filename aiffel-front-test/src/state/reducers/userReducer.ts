@@ -6,7 +6,7 @@ interface UserState {
   user: UserProps | null;
   token: string | null;
   isAuthenticated: boolean;
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
 }
 
@@ -14,7 +14,7 @@ const initialState = {
   user: null,
   token: localStorage.getItem('token'),
   isAuthenticated: false,
-  loading: true,
+  isLoading: true,
   error: null,
 };
 
@@ -27,13 +27,13 @@ const userReducer: Reducer<UserState> = (
       return {
         ...state,
         isAuthenticated: true,
-        loading: false,
+        isLoading: false,
         user: action.payload,
       };
     case UserActionType.LOG_IN:
       return {
         ...state,
-        loading: true,
+        isLoading: true,
       };
     case UserActionType.LOG_IN_SUCCESS:
       return {
@@ -41,7 +41,7 @@ const userReducer: Reducer<UserState> = (
         user: action.payload,
         isAuthenticated: true,
         token: action.payload.password,
-        loading: false,
+        isLoading: false,
         error: null,
       };
     case UserActionType.LOG_IN_ERROR:
@@ -55,7 +55,7 @@ const userReducer: Reducer<UserState> = (
         ...state,
         token: null,
         isAuthenticated: false,
-        loading: false,
+        isLoading: false,
         user: null,
       };
     default:

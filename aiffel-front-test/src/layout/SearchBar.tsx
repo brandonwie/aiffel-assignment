@@ -3,13 +3,13 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 
 interface SearchBarProps {
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onSearch: (event: MouseEvent<HTMLButtonElement>) => void;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onCancel: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const SearchBar: FC<SearchBarProps> = ({
-  onClick,
+  onSearch,
   onChange,
   onCancel,
 }: SearchBarProps): JSX.Element => {
@@ -25,7 +25,7 @@ const SearchBar: FC<SearchBarProps> = ({
       <Button
         type='button'
         className='success md search-button'
-        onClick={onClick}
+        onClick={onSearch}
       >
         검색하기
       </Button>
